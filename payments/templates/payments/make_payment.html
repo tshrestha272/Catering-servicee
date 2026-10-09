@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .payment-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .booking-info {
+            background: #f1f3f6;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .booking-info p {
+            margin: 8px 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .demo-note {
+            margin-top: 20px;
+            padding: 12px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #9a3412;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="payment-container">
+
+    <h1>Make Payment</h1>
+
+    <div class="booking-info">
+        <p><strong>Booking ID:</strong> #{{ booking.id }}</p>
+
+        <p>
+            <strong>Event Type:</strong>
+            {{ booking.get_event_type_display }}
+        </p>
+
+        <p>
+            <strong>Event Date:</strong>
+            {{ booking.event_date }}
+        </p>
+
+        <p>
+            <strong>Guests:</strong>
+            {{ booking.guest_count }}
+        </p>
+
+        <p>
+            <strong>Total Amount:</strong>
+            NPR {{ booking.total_amount }}
+        </p>
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label for="payment_method">
+            Payment Method
+        </label>
+
+        <select name="payment_method" id="payment_method" required>
+            <option value="">Select Payment Method</option>
+            <option value="esewa">eSewa</option>
+            <option value="khalti">Khalti</option>
+            <option value="cash">Cash</option>
+        </select>
+
+        <label for="transaction_id">
+            Transaction ID
+        </label>
+
+        <input
+            type="text"
+            name="transaction_id"
+            id="transaction_id"
+            placeholder="Example: DEMO-12345"
+            required
+        >
+
+        <button type="submit">
+            Confirm Payment
+        </button>
+
+    </form>
+
+    <div class="demo-note">
+        <strong>Demo Payment:</strong>
+        This payment is simulated for academic project demonstration.
+        No real money will be transferred.
+    </div>
+
+</div>
+
+</body>
+</html>

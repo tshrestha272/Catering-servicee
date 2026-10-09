@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .success-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .message {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .payment-details {
+            text-align: left;
+            background: #f1f3f6;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+        .payment-details p {
+            margin: 10px 0;
+        }
+
+        .status {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .back-button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="success-container">
+
+    <div class="success-icon">✓</div>
+
+    <h1>Payment Successful!</h1>
+
+    <p class="message">
+        Your payment has been recorded successfully.
+    </p>
+
+    <div class="payment-details">
+
+        <p>
+            <strong>Booking ID:</strong>
+            #{{ booking.id }}
+        </p>
+
+        <p>
+            <strong>Amount:</strong>
+            NPR {{ payment.amount }}
+        </p>
+
+        <p>
+            <strong>Transaction ID:</strong>
+            {{ payment.transaction_id }}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            <span class="status">
+                {{ payment.get_status_display }}
+            </span>
+        </p>
+
+        <p>
+            <strong>Payment Date:</strong>
+            {{ payment.paid_at }}
+        </p>
+
+    </div>
+
+    <a href="/" class="back-button">
+        Back to Home
+    </a>
+
+</div>
+
+</body>
+</html>

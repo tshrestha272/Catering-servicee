@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Menu | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">THE MENU</div><h1>Familiar favourites,<br><em>made for sharing.</em></h1><p>Our menu can be adjusted to match your event, guest list and preferences.</p></section>
+<section class="section">
+<div class="menu-list">
+{% regroup menu_items by category as categories %}
+{% for category in categories %}
+<div class="menu-category"><h2>{{ category.grouper|title }}</h2>
+{% for item in category.list %}
+<div class="menu-row"><div><h3>{{ item.name }}</h3><p>{{ item.description }}</p></div><strong>Rs. {{ item.price }}</strong></div>
+{% endfor %}</div>
+{% empty %}<p>No menu items have been added yet.</p>{% endfor %}
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Packages | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">PACKAGES</div><h1>Choose your level of<br><em>celebration.</em></h1><p>Every package can be discussed and adjusted before your booking is confirmed.</p></section>
+<section class="section"><div class="package-grid">
+{% for package in packages %}
+<article class="package-card {% if forloop.counter == 2 %}featured{% endif %}">
+{% if forloop.counter == 2 %}<span class="popular">MOST POPULAR</span>{% endif %}
+<h3>{{ package.name }}</h3><div class="package-price">Rs. {{ package.price_per_guest }} <span>/ guest</span></div><p>{{ package.description }}</p>
+{% if package.items.all %}<ul>{% for item in package.items.all %}<li>{{ item.name }}</li>{% endfor %}</ul>{% endif %}
+<a href="{% url 'create_booking' %}" class="btn">Choose package →</a>
+</article>
+{% endfor %}
+</div></section>
+{% endblock %}

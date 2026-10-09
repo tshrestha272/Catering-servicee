@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sunrise Catering | Delicious Moments{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <p class="eyebrow">WEDDINGS · CORPORATE · CELEBRATIONS</p>
+        <h1>Delicious moments,<br><em>beautifully catered.</em></h1>
+        <p class="hero-copy">From intimate family gatherings to grand celebrations, we bring fresh food, warm hospitality and reliable service to your event.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'create_booking' %}" class="btn">Plan Your Event →</a>
+            <a href="{% url 'gallery' %}" class="btn light-btn">See Our Work</a>
+        </div>
+        <div class="hero-note">Serving Kathmandu Valley since 2013</div>
+    </div>
+</section>
+
+<section class="intro section">
+    <div class="section-label">WHY SUNRISE</div>
+    <div class="split-heading">
+        <h2>Catering built around<br>your celebration.</h2>
+        <div>
+            <p>Good catering is more than food. It is timing, presentation, friendly service and making sure your guests feel looked after.</p>
+            <a href="{% url 'about' %}" class="arrow-link">More about us →</a>
+        </div>
+    </div>
+    <div class="stats">
+        <div><strong>12+</strong><span>Years catering</span></div>
+        <div><strong>1,400+</strong><span>Events served</span></div>
+        <div><strong>24</strong><span>Chefs & staff</span></div>
+        <div><strong>4.9/5</strong><span>Average rating</span></div>
+    </div>
+</section>
+
+<section class="section soft-section">
+    <div class="section-label">WHAT WE DO</div>
+    <div class="section-head">
+        <div>
+            <h2>Catering for every kind of occasion.</h2>
+            <p>Choose a service or tell us what you have in mind. We can shape the menu around your guests and budget.</p>
+        </div>
+        <a href="{% url 'services' %}" class="arrow-link">View all services →</a>
+    </div>
+    <div class="card-grid services-grid">
+        {% for service in services %}
+        <article class="service-card">
+            <div class="card-image {{ forloop.counter|divisibleby:2|yesno:'img-warm,img-food' }}"></div>
+            <div class="card-body">
+                <span class="card-number">0{{ forloop.counter }}</span>
+                <h3>{{ service.name }}</h3>
+                <p>{{ service.description|truncatewords:20 }}</p>
+                <a href="{% url 'create_booking' %}">Plan this service →</a>
+            </div>
+        </article>
+        {% empty %}
+        <p>No services added yet. Use the Django admin to add them.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+        <div>
+            <div class="section-label">POPULAR PACKAGES</div>
+            <h2>Simple choices, flexible menus.</h2>
+        </div>
+        <a href="{% url 'packages' %}" class="arrow-link">Compare packages →</a>
+    </div>
+    <div class="package-grid">
+        {% for package in packages %}
+        <article class="package-card {% if forloop.counter == 2 %}featured{% endif %}">
+            {% if forloop.counter == 2 %}<span class="popular">MOST POPULAR</span>{% endif %}
+            <h3>{{ package.name }}</h3>
+            <div class="package-price">Rs. {{ package.price_per_guest }} <span>/ guest</span></div>
+            <p>{{ package.description }}</p>
+            <a href="{% url 'create_booking' %}" class="btn {% if forloop.counter == 2 %}dark-btn{% endif %}">Choose {{ package.name }}</a>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section gallery-preview soft-section">
+    <div class="section-head">
+        <div>
+            <div class="section-label">OUR EVENTS</div>
+            <h2>A few moments we've catered.</h2>
+        </div>
+        <a href="{% url 'gallery' %}" class="arrow-link">View gallery →</a>
+    </div>
+    <div class="gallery-grid">
+        {% for item in gallery_items %}
+        <a class="gallery-tile tile-{{ forloop.counter }}" href="{% url 'gallery' %}">
+            <div class="tile-content"><span>{{ item.category|title }}</span><h3>{{ item.title }}</h3></div>
+        </a>
+        {% empty %}
+        <div class="gallery-tile tile-1"><div class="tile-content"><span>Weddings</span><h3>Beautiful celebrations</h3></div></div>
+        <div class="gallery-tile tile-2"><div class="tile-content"><span>Buffet</span><h3>Grand buffet tables</h3></div></div>
+        <div class="gallery-tile tile-3"><div class="tile-content"><span>Corporate</span><h3>Business events</h3></div></div>
+        <div class="gallery-tile tile-4"><div class="tile-content"><span>Desserts</span><h3>Sweet finishes</h3></div></div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section testimonial-section">
+    <div class="section-label">CLIENT FEEDBACK</div>
+    <h2>People remember the food.</h2>
+    <div class="testimonial-grid">
+        {% for t in testimonials %}
+        <article class="testimonial">
+            <div class="stars">{% for i in "12345"|make_list %}★{% endfor %}</div>
+            <p>“{{ t.message }}”</p>
+            <strong>{{ t.client_name }}</strong>
+            <span>{{ t.event_type }}</span>
+        </article>
+        {% empty %}
+        <article class="testimonial"><div class="stars">★★★★★</div><p>“The team was professional, the food was fresh and our guests kept asking where we found the caterer.”</p><strong>Priya & Suman</strong><span>Wedding</span></article>
+        <article class="testimonial"><div class="stars">★★★★★</div><p>“Everything arrived on time and the buffet looked fantastic. It made our office event much easier.”</p><strong>Ramesh K.</strong><span>Corporate Event</span></article>
+        <article class="testimonial"><div class="stars">★★★★★</div><p>“Great food, friendly staff and no last-minute stress. We would definitely book Sunrise again.”</p><strong>Anita Shrestha</strong><span>Birthday</span></article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="cta">
+    <div>
+        <span class="section-label">READY WHEN YOU ARE</span>
+        <h2>Planning your next celebration?</h2>
+        <p>Tell us your date, guest count and the kind of event you are planning.</p>
+    </div>
+    <a href="{% url 'create_booking' %}" class="btn light-btn">Start a Booking →</a>
+</section>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Login | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="auth-page"><div class="auth-card"><div class="section-label">WELCOME BACK</div><h1>Log in</h1><p>Access your bookings and event details.</p>
+<form method="post">{% csrf_token %}{{ form.as_p }}{% if form.errors %}<p class="form-error">Please check your username and password.</p>{% endif %}<button class="btn full-btn" type="submit">Login</button></form>
+<p class="auth-switch">New here? <a href="{% url 'register' %}">Create an account</a></p></div></section>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Booking #{{ booking.id }} | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">BOOKING #{{ booking.id }}</div><h1>{{ booking.event_type|title }} <em>event.</em></h1><p>Your request has been saved. Keep this page for your event details.</p></section>
+<section class="section detail-grid">
+<div class="detail-card"><div class="detail-status"><span class="status {{ booking.status }}">{{ booking.status|title }}</span></div><div class="detail-item"><span>Date</span><strong>{{ booking.event_date }}</strong></div><div class="detail-item"><span>Time</span><strong>{{ booking.event_time|default:"To be confirmed" }}</strong></div><div class="detail-item"><span>Guests</span><strong>{{ booking.guest_count }}</strong></div><div class="detail-item"><span>Venue</span><strong>{{ booking.venue }}</strong></div><div class="detail-item"><span>Package</span><strong>{{ booking.package|default:"Custom service" }}</strong></div><div class="detail-item"><span>Estimated total</span><strong>Rs. {{ booking.total_amount }}</strong></div></div>
+<div><div class="tip"><strong>Payment status</strong><p>{% if payment %}{{ payment.status|title }} — Rs. {{ payment.amount }}{% else %}Pending{% endif %}</p><small>This is a demo payment record. No real money is charged through this project.</small></div><div class="tip"><strong>Special request</strong><p>{{ booking.special_request|default:"No special request added." }}</p></div></div>
+</section>
+{% endblock %}

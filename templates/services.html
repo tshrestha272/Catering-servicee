@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Services | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">OUR SERVICES</div><h1>Whatever the occasion,<br><em>we'll bring the table.</em></h1><p>Pick a service below or create a custom booking for your event.</p></section>
+<section class="section"><div class="card-grid services-grid">
+{% for service in services %}
+<article class="service-card large"><div class="card-image img-food"></div><div class="card-body"><h3>{{ service.name }}</h3><p>{{ service.description }}</p>{% if service.starting_price %}<strong>From Rs. {{ service.starting_price }} / guest</strong>{% endif %}<a href="{% url 'create_booking' %}">Book this service →</a></div></article>
+{% empty %}<p>No services are available yet.</p>{% endfor %}
+</div></section>
+{% endblock %}

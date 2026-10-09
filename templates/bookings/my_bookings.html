@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}My Bookings | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">MY BOOKINGS</div><h1>Your event<br><em>requests.</em></h1></section>
+<section class="section"><div class="booking-list">
+{% for booking in bookings %}<a class="booking-row" href="{% url 'booking_detail' booking.id %}"><div><strong>{{ booking.event_type|title }}</strong><span>{{ booking.event_date }} · {{ booking.guest_count }} guests · {{ booking.venue }}</span></div><div><strong>Rs. {{ booking.total_amount }}</strong><span class="status {{ booking.status }}">{{ booking.status|title }}</span></div></a>{% empty %}<div class="empty-box">No bookings yet. <a href="{% url 'create_booking' %}">Create your first booking →</a></div>{% endfor %}
+</div></section>
+{% endblock %}

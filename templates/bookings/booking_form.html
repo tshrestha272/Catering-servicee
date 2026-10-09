@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Book Your Event | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">NEW BOOKING</div><h1>Tell us about<br><em>your event.</em></h1><p>Submit your details and we'll review the request before confirming it.</p></section>
+<section class="section form-layout"><form method="post" class="form-card">{% csrf_token %}{% if form.non_field_errors %}<div class="form-error">{{ form.non_field_errors }}</div>{% endif %}{{ form.as_p }}<button class="btn full-btn" type="submit">Submit Booking Request →</button></form><aside class="form-side"><div class="tip"><strong>How it works</strong><p>1. Send your event details.</p><p>2. We review the menu and availability.</p><p>3. Your booking is confirmed after discussion.</p></div><div class="tip"><strong>Need help?</strong><p>Call +977 9801234567 or use our contact page.</p></div></aside></section>
+{% endblock %}

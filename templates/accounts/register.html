@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Create Account | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="auth-page"><div class="auth-card wide"><div class="section-label">GET STARTED</div><h1>Create your account</h1><p>Save your booking details and check your event status.</p>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn full-btn" type="submit">Create Account</button></form>
+<p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Log in</a></p></div></section>
+{% endblock %}

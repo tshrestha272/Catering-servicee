@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Gallery | Sunrise Catering{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="section-label">GALLERY</div><h1>Tables, people,<br><em>happy moments.</em></h1><p>A look at the kind of celebrations we love being part of.</p></section>
+<section class="section"><div class="gallery-grid gallery-page">
+{% for item in gallery_items %}
+<div class="gallery-tile tile-{{ forloop.counter }}"><div class="tile-content"><span>{{ item.category|title }}</span><h3>{{ item.title }}</h3><p>{{ item.description }}</p></div></div>
+{% empty %}
+<div class="gallery-tile tile-1"><div class="tile-content"><span>Wedding</span><h3>Elegant wedding setup</h3></div></div>
+<div class="gallery-tile tile-2"><div class="tile-content"><span>Buffet</span><h3>Fresh buffet spread</h3></div></div>
+<div class="gallery-tile tile-3"><div class="tile-content"><span>Corporate</span><h3>Corporate reception</h3></div></div>
+<div class="gallery-tile tile-4"><div class="tile-content"><span>Dessert</span><h3>Dessert table</h3></div></div>
+{% endfor %}
+</div></section>
+{% endblock %}

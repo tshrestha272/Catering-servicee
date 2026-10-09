@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sunrise Catering Services{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="navbar">
+    <a class="logo" href="{% url 'home' %}">
+        <span class="logo-mark">☀</span>
+        <span><strong>Sunrise</strong><small>CATERING SERVICES</small></span>
+    </a>
+
+    <button class="menu-toggle" onclick="document.body.classList.toggle('nav-open')">☰</button>
+
+    <nav class="main-nav">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'packages' %}">Packages</a>
+        <a href="{% url 'gallery' %}">Gallery</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="text-link">Hi, {{ user.first_name|default:user.username }}</a>
+            <a href="{% url 'create_booking' %}" class="btn small-btn">Book Now</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="text-link">Login</a>
+            <a href="{% url 'create_booking' %}" class="btn small-btn">Get a Quote</a>
+        {% endif %}
+    </div>
+</header>
+
+{% if messages %}
+<div class="messages-wrap">
+    {% for message in messages %}
+    <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div>
+        <div class="footer-logo">Sunrise Catering</div>
+        <p>Fresh food, thoughtful service and memorable celebrations in Kathmandu.</p>
+    </div>
+    <div>
+        <h4>Quick Links</h4>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'menu' %}">Menu</a>
+        <a href="{% url 'gallery' %}">Gallery</a>
+        <a href="{% url 'contact' %}">Contact</a>
+    </div>
+    <div>
+        <h4>Contact</h4>
+        <p>+977 9801234567</p>
+        <p>hello@sunrisecatering.com</p>
+        <p>Kathmandu, Nepal</p>
+    </div>
+    <div class="footer-bottom">© 2026 Sunrise Catering Services. All rights reserved.</div>
+</footer>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
